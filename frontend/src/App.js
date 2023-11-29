@@ -23,7 +23,7 @@ class App extends Component {
 
   refreshList = () => {
     axios
-      .get("/api/todos/")
+      .get("/api/MFRE/")
       .then((res) => this.setState({ todoList: res.data }))
       .catch((err) => console.log(err));
   };
@@ -37,18 +37,18 @@ class App extends Component {
 
     if (item.id) {
       axios
-        .put(`/api/todos/${item.id}/`, item)
+        .put(`/api/MFRE/${item.id}/`, item)
         .then((res) => this.refreshList());
       return;
     }
     axios
-      .post("/api/todos/", item)
+      .post("/api/MFRE/", item)
       .then((res) => this.refreshList());
   };
 
   handleDelete = (item) => {
     axios
-      .delete(`/api/todos/${item.id}/`)
+      .delete(`/api/MFRE/${item.id}/`)
       .then((res) => this.refreshList());
   };
 
@@ -129,7 +129,7 @@ class App extends Component {
   render() {
     return (
       <main className="container">
-        <h1 className="text-black text-uppercase text-center my-4">Todo app</h1>
+        <h1 className="text-black text-uppercase text-center my-4">Multifamily Real Estate Model app</h1>
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
