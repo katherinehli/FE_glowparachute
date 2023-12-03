@@ -10,9 +10,9 @@ class App extends Component {
       todoList: [],
       modal: false,
       activeItem: {
-        title: "",
-        description: "",
-        completed: false,
+        buildingName: "",
+        dealName: "",
+        locationDescription: false,
       },
     };
   }
@@ -53,7 +53,7 @@ class App extends Component {
   };
 
   createItem = () => {
-    const item = { title: "", description: "", completed: false };
+    const item = { buildingName: "", dealName: "", locationDescription: false };
 
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
@@ -92,7 +92,7 @@ class App extends Component {
   renderItems = () => {
     const { viewCompleted } = this.state;
     const newItems = this.state.todoList.filter(
-      (item) => item.completed === viewCompleted
+      (item) => item.locationDescription === viewCompleted
     );
 
     return newItems.map((item) => (
@@ -101,12 +101,12 @@ class App extends Component {
         className="list-group-item d-flex justify-content-between align-items-center"
       >
         <span
-          className={`todo-title mr-2 ${
-            this.state.viewCompleted ? "completed-todo" : ""
+          className={`todo-buildingName mr-2 ${
+            this.state.viewCompleted ? "locationDescription-todo" : ""
           }`}
-          title={item.description}
+          buildingName={item.dealName}
         >
-          {item.title}
+          {item.buildingName}
         </span>
         <span>
           <button
