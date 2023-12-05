@@ -71,7 +71,7 @@ export default class CustomModal extends Component {
                 />
                 locationDescription
               </Label>
-            </FormGroup>
+            </FormGroup>  
           </Form>
         </ModalBody>
         <ModalFooter>
