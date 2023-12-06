@@ -1,4 +1,4 @@
-# glowparachute_FE
+# FE_glowparachute
 Skeleton website front-end for financial modeling
 
 ## Setup
