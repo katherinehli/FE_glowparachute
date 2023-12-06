@@ -2,8 +2,8 @@
 Skeleton website front-end for financial modeling
 
 ## Setup
-Requirements |
------------- |
+| Requirements |
+|--------------|
 Node.js: https://nodejs.org/en/download
 
 #### STEPS: 
