@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Switch } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Modal from "./components/Modal";
 import axios from "axios";
@@ -16,7 +16,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      viewCompleted: false,
+      // viewCompleted: false,
       MFREList: [],
       modal: false,
       activeItem: {
@@ -77,38 +77,39 @@ class App extends Component {
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
 
-  displayCompleted = (status) => {
-    if (status) {
-      return this.setState({ viewCompleted: true });
-    }
+  // displayCompleted = (status) => {
+  //   if (status) {
+  //     return this.setState({ viewCompleted: true });
+  //   }
 
-    return this.setState({ viewCompleted: false });
-  };
+  //   return this.setState({ viewCompleted: false });
+  // };
 
   renderTabList = () => {
     return (
       <div className="nav nav-tabs">
         <span
           onClick={() => this.displayCompleted(true)}
-          className={this.state.viewCompleted ? "nav-link active" : "nav-link"}
+          // className={this.state.viewCompleted ? "nav-link active" : "nav-link"}
         >
-          Complete
+          Created Models
         </span>
-        <span
+        {/* <span
           onClick={() => this.displayCompleted(false)}
-          className={this.state.viewCompleted ? "nav-link" : "nav-link active"}
+          // className={this.state.viewCompleted ? "nav-link" : "nav-link active"}
         >
           Incomplete
-        </span>
+        </span> */}
       </div>
     );
   };
 
   renderItems = () => {
     const { viewCompleted } = this.state;
-    const newItems = this.state.MFREList.filter(
-      (item) => item.locationDescription === viewCompleted
-    );
+    const newItems = this.state.MFREList
+    // const newItems = this.state.MFREList.filter(
+    //   (item) => item.locationDescription === viewCompleted
+    // );
 
     return newItems.map((item) => (
       <li
@@ -145,7 +146,7 @@ class App extends Component {
     return (
       <main className="container">
         <Routes>
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/login" component={<LoginPage />} />
         </Routes>
         <h1 className="text-black text-center my-4">Multifamily Real Estate Model app</h1>
         <div className="row">
