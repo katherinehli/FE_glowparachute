@@ -77,14 +77,6 @@ class App extends Component {
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
 
-  // displayCompleted = (status) => {
-  //   if (status) {
-  //     return this.setState({ viewCompleted: true });
-  //   }
-
-  //   return this.setState({ viewCompleted: false });
-  // };
-
   renderTabList = () => {
     return (
       <div className="nav nav-tabs">
@@ -104,12 +96,18 @@ class App extends Component {
     );
   };
 
+  createModel = () => {
+    const item = { buildingName: "", dealName: "", locationDescription: false };
+    this.setState({ activeItem: item, modal: !this.state.modal });
+  }
+
   renderItems = () => {
     // const { viewCompleted } = this.state;
     const newItems = this.state.MFREList
     // const newItems = this.state.MFREList.filter(
     //   (item) => item.locationDescription === viewCompleted
     // );
+    newItems.map((item) => console.log(item));
 
     return newItems.map((item) => (
       <li
@@ -117,13 +115,11 @@ class App extends Component {
         className="list-group-item d-flex justify-content-between align-items-center"
       >
         <span
-          // className={`MFRE-buildingname mr-2 ${
-          //   this.state.viewCompleted ? "locationDescription-MFRE" : ""
-          // }`}
-          className={`MFRE-buildingname mr-2`}
+          className={`MFRE-buildingname mr-2 locationDescription-MFRE`}
+          // className={`MFRE-buildingname mr-2`}
           buildingname={item.dealName}
         >
-          {item.buildingname}
+          {item.buildingName}
         </span>
         <span>
           <button
@@ -159,6 +155,10 @@ class App extends Component {
                   onClick={this.goToLoginPage}
                 >
                   Navigate to Login Page
+                </button>
+                <button className="btn btn-outline-primary"
+                        onClick={this.createModel}>
+                  Create New Model
                 </button>
               </div>
               {this.renderTabList()}
