@@ -1,18 +1,31 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Modal from "./components/Modal";
 import axios from "axios";
+import LoginPage from './Pages/LoginPage';
+
+function withNavigation(Component) {
+  return props => {
+    const navigate = useNavigate();
+    return <Component {...props} navigate={navigate} />;
+  };
+}
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       viewCompleted: false,
-      todoList: [],
+      MFREList: [],
       modal: false,
       activeItem: {
         buildingName: "",
         dealName: "",
-        locationDescription: false,
+        locationDescription: "",
+        numApartmentUnits: 0,
+        numParkingSpots: 0,
+        parkingSpotsPerUnit: 0
       },
     };
   }
@@ -24,7 +37,7 @@ class App extends Component {
   refreshList = () => {
     axios
       .get("/api/MFRE/")
-      .then((res) => this.setState({ todoList: res.data }))
+      .then((res) => this.setState({ MFREList: res.data }))
       .catch((err) => console.log(err));
   };
 
@@ -52,10 +65,12 @@ class App extends Component {
       .then((res) => this.refreshList());
   };
 
-  createItem = () => {
-    const item = { buildingName: "", dealName: "", locationDescription: false };
+  goToLoginPage = () => {
+    const item = { buildingName: "", dealName: "", locationDescription: "", numApartmentUnits: 0, numParkingSpots: 0, parkingSpotsPerUnit: 0};
 
-    this.setState({ activeItem: item, modal: !this.state.modal });
+    // this.setState({ activeItem: item, modal: !this.state.modal }); from tutorial
+    this.props.navigate('/login');
+    
   };
 
   editItem = (item) => {
@@ -91,7 +106,7 @@ class App extends Component {
 
   renderItems = () => {
     const { viewCompleted } = this.state;
-    const newItems = this.state.todoList.filter(
+    const newItems = this.state.MFREList.filter(
       (item) => item.locationDescription === viewCompleted
     );
 
@@ -101,8 +116,8 @@ class App extends Component {
         className="list-group-item d-flex justify-content-between align-items-center"
       >
         <span
-          className={`todo-buildingName mr-2 ${
-            this.state.viewCompleted ? "locationDescription-todo" : ""
+          className={`MFRE-buildingName mr-2 ${
+            this.state.viewCompleted ? "locationDescription-MFRE" : ""
           }`}
           buildingName={item.dealName}
         >
@@ -129,16 +144,19 @@ class App extends Component {
   render() {
     return (
       <main className="container">
-        <h1 className="text-black text-uppercase text-center my-4">Multifamily Real Estate Model app</h1>
+        <Routes>
+            <Route path="/login" element={<LoginPage />} />
+        </Routes>
+        <h1 className="text-black text-center my-4">Multifamily Real Estate Model app</h1>
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
               <div className="mb-4">
                 <button
                   className="btn btn-primary"
-                  onClick={this.createItem}
+                  onClick={this.goToLoginPage}
                 >
-                  Add task
+                  Navigate to Login Page
                 </button>
               </div>
               {this.renderTabList()}
@@ -160,4 +178,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withNavigation(App);
