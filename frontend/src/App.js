@@ -20,7 +20,7 @@ class App extends Component {
       MFREList: [],
       modal: false,
       activeItem: {
-        buildingName: "",
+        buildingname: "", // for some reason react complained about the capitalized Name
         dealName: "",
         locationDescription: "",
         numApartmentUnits: 0,
@@ -66,7 +66,7 @@ class App extends Component {
   };
 
   goToLoginPage = () => {
-    const item = { buildingName: "", dealName: "", locationDescription: "", numApartmentUnits: 0, numParkingSpots: 0, parkingSpotsPerUnit: 0};
+    const item = { buildingname: "", dealName: "", locationDescription: "", numApartmentUnits: 0, numParkingSpots: 0, parkingSpotsPerUnit: 0};
 
     // this.setState({ activeItem: item, modal: !this.state.modal }); from tutorial
     this.props.navigate('/login');
@@ -105,7 +105,7 @@ class App extends Component {
   };
 
   renderItems = () => {
-    const { viewCompleted } = this.state;
+    // const { viewCompleted } = this.state;
     const newItems = this.state.MFREList
     // const newItems = this.state.MFREList.filter(
     //   (item) => item.locationDescription === viewCompleted
@@ -117,12 +117,13 @@ class App extends Component {
         className="list-group-item d-flex justify-content-between align-items-center"
       >
         <span
-          className={`MFRE-buildingName mr-2 ${
-            this.state.viewCompleted ? "locationDescription-MFRE" : ""
-          }`}
-          buildingName={item.dealName}
+          // className={`MFRE-buildingname mr-2 ${
+          //   this.state.viewCompleted ? "locationDescription-MFRE" : ""
+          // }`}
+          className={`MFRE-buildingname mr-2`}
+          buildingname={item.dealName}
         >
-          {item.buildingName}
+          {item.buildingname}
         </span>
         <span>
           <button
@@ -146,7 +147,7 @@ class App extends Component {
     return (
       <main className="container">
         <Routes>
-            <Route path="/login" component={<LoginPage />} />
+            <Route path="/login" element={<LoginPage />} />
         </Routes>
         <h1 className="text-black text-center my-4">Multifamily Real Estate Model app</h1>
         <div className="row">
