@@ -94,6 +94,7 @@ class App extends Component {
     const newItems = this.state.todoList.filter(
       (item) => item.locationDescription === viewCompleted
     );
+    newItems.map((item) => console.log(item));
 
     return newItems.map((item) => (
       <li
