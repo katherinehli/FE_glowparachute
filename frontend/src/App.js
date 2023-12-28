@@ -1,18 +1,33 @@
 import React, { Component } from "react";
+import {BrowserRouter as Router, Routes, Route, Switch, Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Modal from "./components/Modal";
 import axios from "axios";
+import LoginPage from './Pages/LoginPage';
+
+<Route path="Pages/LoginPage.js" component={LoginPage} />
+
+function withNavigation(Component) {
+  return props => {
+    const navigate = useNavigate();
+    return <Component {...props} navigate={navigate} />;
+  };
+}
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      viewCompleted: false,
-      todoList: [],
+      // viewCompleted: false,
+      MFREList: [],
       modal: false,
       activeItem: {
-        buildingName: "",
+        buildingname: "", // for some reason react complained about the capitalized Name
         dealName: "",
-        locationDescription: false,
+        locationDescription: "",
+        numApartmentUnits: 0,
+        numParkingSpots: 0,
+        parkingSpotsPerUnit: 0
       },
     };
   }
@@ -24,7 +39,7 @@ class App extends Component {
   refreshList = () => {
     axios
       .get("/api/MFRE/")
-      .then((res) => this.setState({ todoList: res.data }))
+      .then((res) => this.setState({ MFREList: res.data }))
       .catch((err) => console.log(err));
   };
 
@@ -52,22 +67,16 @@ class App extends Component {
       .then((res) => this.refreshList());
   };
 
-  createItem = () => {
-    const item = { buildingName: "", dealName: "", locationDescription: false };
+  goToLoginPage = () => {
+    const item = { buildingname: "", dealName: "", locationDescription: "", numApartmentUnits: 0, numParkingSpots: 0, parkingSpotsPerUnit: 0};
 
-    this.setState({ activeItem: item, modal: !this.state.modal });
+    // this.setState({ activeItem: item, modal: !this.state.modal }); from tutorial
+    this.props.navigate('/login');
+
   };
 
   editItem = (item) => {
     this.setState({ activeItem: item, modal: !this.state.modal });
-  };
-
-  displayCompleted = (status) => {
-    if (status) {
-      return this.setState({ viewCompleted: true });
-    }
-
-    return this.setState({ viewCompleted: false });
   };
 
   renderTabList = () => {
@@ -75,25 +84,31 @@ class App extends Component {
       <div className="nav nav-tabs">
         <span
           onClick={() => this.displayCompleted(true)}
-          className={this.state.viewCompleted ? "nav-link active" : "nav-link"}
+          // className={this.state.viewCompleted ? "nav-link active" : "nav-link"}
         >
-          Complete
+          Created Models
         </span>
-        <span
+        {/* <span
           onClick={() => this.displayCompleted(false)}
-          className={this.state.viewCompleted ? "nav-link" : "nav-link active"}
+          // className={this.state.viewCompleted ? "nav-link" : "nav-link active"}
         >
           Incomplete
-        </span>
+        </span> */}
       </div>
     );
   };
 
+  createModel = () => {
+    const item = { buildingName: "", dealName: "", locationDescription: false };
+    this.setState({ activeItem: item, modal: !this.state.modal });
+  }
+
   renderItems = () => {
-    const { viewCompleted } = this.state;
-    const newItems = this.state.todoList.filter(
-      (item) => item.locationDescription === viewCompleted
-    );
+    // const { viewCompleted } = this.state;
+    const newItems = this.state.MFREList
+    // const newItems = this.state.MFREList.filter(
+    //   (item) => item.locationDescription === viewCompleted
+    // );
     newItems.map((item) => console.log(item));
 
     return newItems.map((item) => (
@@ -102,10 +117,9 @@ class App extends Component {
         className="list-group-item d-flex justify-content-between align-items-center"
       >
         <span
-          className={`todo-buildingName mr-2 ${
-            this.state.viewCompleted ? "locationDescription-todo" : ""
-          }`}
-          buildingName={item.dealName}
+          className={`MFRE-buildingname mr-2 locationDescription-MFRE`}
+          // className={`MFRE-buildingname mr-2`}
+          buildingname={item.dealName}
         >
           {item.buildingName}
         </span>
@@ -130,16 +144,20 @@ class App extends Component {
   render() {
     return (
       <main className="container">
-        <h1 className="text-black text-uppercase text-center my-4">Multifamily Real Estate Model app</h1>
+        <Routes>
+            <Route path="/login" element={<LoginPage />} />
+        </Routes>
+        <h1 className="text-black text-center my-4">Multifamily Real Estate Model app</h1>
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
               <div className="mb-4">
-                <button
-                  className="btn btn-primary"
-                  onClick={this.createItem}
-                >
-                  Add task
+                <div>
+                  <Link className="btn btn-primary" to="Pages/LoginPage.js">Navigate to Login Page</Link>
+                </div>
+                <button className="btn btn-outline-primary"
+                        onClick={this.createModel}>
+                  Create New Model
                 </button>
               </div>
               {this.renderTabList()}
@@ -161,4 +179,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withNavigation(App);

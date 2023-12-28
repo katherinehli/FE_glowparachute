@@ -36,41 +36,40 @@ export default class CustomModal extends Component {
 
     return (
       <Modal isOpen={true} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Todo Item</ModalHeader>
+        <ModalHeader toggle={toggle}>MFRE Models</ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup>
-              <Label for="todo-buildingName">buildingName</Label>
+              <Label for="MFRE-buildingName">Building Name</Label>
               <Input
                 type="text"
-                id="todo-buildingName"
+                id="MFRE-buildingName"
                 name="buildingName"
                 value={this.state.activeItem.buildingName}
                 onChange={this.handleChange}
-                placeholder="Enter Todo buildingName"
+                placeholder="Enter Building Name"
               />
             </FormGroup>
             <FormGroup>
-              <Label for="todo-dealName">dealName</Label>
+              <Label for="MFRE-dealName">Deal Name</Label>
               <Input
                 type="text"
-                id="todo-dealName"
+                id="MFRE-dealName"
                 name="dealName"
                 value={this.state.activeItem.dealName}
                 onChange={this.handleChange}
-                placeholder="Enter Todo dealName"
+                placeholder="Enter Deal Name"
               />
             </FormGroup>
-            <FormGroup check>
-              <Label check>
-                <Input
-                  type="checkbox"
+            <FormGroup>
+              <Label>Location Description</Label>
+              <Input
+                  type="text"
                   name="locationDescription"
-                  checked={this.state.activeItem.locationDescription}
+                  value={this.state.activeItem.locationDescription}
                   onChange={this.handleChange}
+                  placeholder="Enter Location Description"
                 />
-                locationDescription
-              </Label>
             </FormGroup>  
           </Form>
         </ModalBody>
