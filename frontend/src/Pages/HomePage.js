@@ -1,10 +1,11 @@
+
 import React, {Component} from "react";
 import axios from "axios";
 import {Link, Route, Routes} from "react-router-dom";
 import LoginPage from "./LoginPage";
 import Modal from "../components/Modal";
 
-class App extends Component {
+class HomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -174,4 +175,4 @@ class App extends Component {
     }
 
 }
-export default App;
+export default HomePage;

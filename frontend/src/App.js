@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Routes, Route, Switch, Link} from 'react-router
 import { useNavigate } from 'react-router-dom';
 import LoginPage from './Pages/LoginPage';
 import HomePage from './Pages/HomePage';
+import CreateModelPage from './Pages/CreateModelPage'
 
 
 
@@ -16,8 +17,9 @@ function withNavigation(Component) {
 const Main = () => {
   return (
       <Routes> {/* The Switch decides which component to show based on the current URL.*/}
-        <Route exact path='/' element={<HomePage/>}></Route>
-        <Route exact path='/login' element={<LoginPage/>}></Route>
+          <Route exact path='/' element={<HomePage/>}></Route>
+          <Route exact path='/login' element={<LoginPage/>}></Route>
+          <Route exact path='/create' element={<CreateModelPage/>}></Route>
       </Routes>
   );
 };
