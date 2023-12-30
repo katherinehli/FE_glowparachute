@@ -96,7 +96,7 @@ class App extends Component {
     };
 
     createModel = () => {
-        const item = {buildingName: "", dealName: "", locationDescription: false};
+        const item = {buildingName: "", dealName: "", locationDescription: "false"};
         this.setState({activeItem: item, modal: !this.state.modal});
     }
 
