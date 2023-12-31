@@ -58,21 +58,6 @@ class HomePage extends Component {
             .then((res) => this.refreshList());
     };
 
-    goToLoginPage = () => {
-        const item = {
-            buildingname: "",
-            dealName: "",
-            locationDescription: "",
-            numApartmentUnits: 0,
-            numParkingSpots: 0,
-            parkingSpotsPerUnit: 0
-        };
-
-        // this.setState({ activeItem: item, modal: !this.state.modal }); from tutorial
-        this.props.navigate('/login');
-
-    };
-
     editItem = (item) => {
         this.setState({activeItem: item, modal: !this.state.modal});
     };
@@ -146,10 +131,6 @@ class HomePage extends Component {
                     <div className="col-md-6 col-sm-10 mx-auto p-0">
                         <div className="card p-3">
                             <div className="mb-4">
-                                <div>
-                                    <Link className="btn btn-primary" to="login">Navigate to Login
-                                        Page</Link>
-                                </div>
                                 <button className="btn btn-outline-primary"
                                         onClick={this.createModel}>
                                     Create New Model
