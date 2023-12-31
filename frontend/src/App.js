@@ -11,7 +11,7 @@ import CreateModelPage from './Pages/CreateModelPage'
 import Header from "./components/Header";
 
 const App = () => (
-    <div className="App">
+    <div className="App" style={{height: "100%"}}>
         <Header />
         <Routes>
             <Route exact path="/" element={<HomePage/>} />

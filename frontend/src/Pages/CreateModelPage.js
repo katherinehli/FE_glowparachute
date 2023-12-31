@@ -30,7 +30,7 @@ class CreateModelPage extends Component {
 
     render(){
         return (
-            <div>
+            <div className={"my-auto p-2"} style={{height: "100%"}}>
                 <h1 className="text-black text-center my-4">Create Model Page</h1>
                 <Form>
                     <FormGroup>
@@ -38,10 +38,10 @@ class CreateModelPage extends Component {
                         <Input
                             type="text"
                             id="dealName"
-                            name="buildingName"
-                            value={this.state.activeItem.buildingName}
+                            name="dealName"
+                            value={this.state.dealName}
                             onChange={this.handleChange}
-                            placeholder="Enter Building Name"
+                            placeholder="Enter Deal Name"
                         />
                     </FormGroup>
                     <FormGroup>
@@ -50,9 +50,8 @@ class CreateModelPage extends Component {
                             type="text"
                             id="MFRE-dealName"
                             name="dealName"
-                            value={this.state.activeItem.dealName}
-                            onChange={this.handleChange}
-                            placeholder="Enter Deal Name"
+                            onChange={this.state.handleChange}
+                            placeholder="Building Address"
                         />
                     </FormGroup>
                     <FormGroup>
@@ -60,7 +59,7 @@ class CreateModelPage extends Component {
                         <Input
                             type="text"
                             name="locationDescription"
-                            value={this.state.activeItem.locationDescription}
+                            value={this.state.locationDescription}
                             onChange={this.handleChange}
                             placeholder="Enter Location Description"
                         />
