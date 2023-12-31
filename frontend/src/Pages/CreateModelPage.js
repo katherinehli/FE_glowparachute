@@ -12,12 +12,12 @@ class CreateModelPage extends Component {
                 <h1 className="text-black text-center my-4">Create Model Page</h1>
                 <form>
                     <div className="mb-3">
-                        <label for="MFRE-buildingName" className="form-label">Deal Name</label>
+                        <label className="form-label">Deal Name</label>
                         <input type="text" className="form-control" id="deal-name"></input>
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="MFRE-buildingName" className="form-label">Add Buildings</label>
-                        <input type="text" className="form-control" id="deal-name"></input>
+                        <label className="form-label">Add Buildings</label>
+                        <input type="text" className="form-control" id="building-search"></input>
                     </div>
 
                 </form>
